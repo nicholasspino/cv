@@ -1,156 +1,108 @@
 ---
-title: Nick Strayer's Resume"
-author: Nick Strayer
-date: "`r Sys.Date()`"
+title: "Nicholas Spino's CV"
+author: "Nicholas Paul Spino"
 output:
   pagedown::html_resume:
-    css: ['css/custom_resume.css', 'css/styles.css', 'resume']
-    # set it to true for a self-contained HTML page but it'll take longer to render
+    css: ['resume', 'cv-styles.css']
     self_contained: true
 ---
 
-
-```{r, include=FALSE}
-knitr::opts_chunk$set(
-  results='asis', 
-  echo = FALSE
-)
-library(tidyverse)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(results = 'asis', echo = FALSE, message = FALSE, warning = FALSE)
 library(glue)
-
-# Set this to true to have links turned into footnotes at the end of the document
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(stringr)
 PDF_EXPORT <- FALSE
-
-# Holds all the links that were inserted for placement at the end
 links <- c()
-
 source('parsing_functions.R')
-
-
-# First let's get the data, filtering to only the items tagged as
-# Resume items
-position_data <- read_csv('positions.csv') %>% 
-  filter(in_resume) %>% 
-  mutate(
-    # Build some custom sections by collapsing others
-    section = case_when(
-      section %in% c('research_positions', 'industry_positions') ~ 'positions', 
-      section %in% c('data_science_writings', 'by_me_press') ~ 'writings',
-      TRUE ~ section
-    )
-  ) 
-
+position_data <- readr::read_csv(
+  'positions.csv',
+  col_types = readr::cols(.default = readr::col_character(),
+                        sort_order = readr::col_integer())
+)
 ```
-
 
 Aside
 ================================================================================
 
-
-![logo](beta_dist.png){width=100%}
-
-Contact {#contact}
+Professional Profile
 --------------------------------------------------------------------------------
 
+Contract specialist with a background in military intelligence, economics, and data analysis.
 
-
-- <i class="fa fa-envelope"></i> nick.strayer@gmail.com
-- <i class="fa fa-twitter"></i> NicholasStrayer
-- <i class="fa fa-github"></i> github.com/nstrayer
-- <i class="fa fa-link"></i> [nickstrayer.me](http://nickstrayer.me/)
-- <i class="fa fa-phone"></i> (734) 645-0110
-
-
-
-Language Skills {#skills}
+Professional Links {#contact}
 --------------------------------------------------------------------------------
 
+- [LinkedIn](https://www.linkedin.com/in/nicholas-spino-006993379)
+- [GitHub](https://github.com/nicholasspino)
 
-```{r}
-skills <- tribble(
-  ~skill,               ~level,
-  "R",                  5,
-  "Javascript (d3.js)", 4.5,
-  "Python",             4,
-  "Bash",               3.5,
-  "SQL",                3,
-  "C++",                3,
-  "AWK",                3
-)
-build_skill_bars(skills)
-```
-
-
-
-Open Source Contributions {#open-source}
+Core Skills {#skills}
 --------------------------------------------------------------------------------
 
-All projects available at `github.com/nstrayer/<name>`
+- Contract support
+- Market research
+- Pricing review
+- Data interpretation
+- Intelligence reporting
+- Executive presentations
+- Team development
+- Cross-cultural communication
 
-
-- `shinysense`: R package to use sensor data in Shiny apps
-- `tuftesque`: Hugo theme (behind LiveFreeOrDichotomize.com)
-- `slid3r`: D3 add-on for fully svg slider inputs
-
-
-More info {#more-info}
+Tools
 --------------------------------------------------------------------------------
 
-See full CV at nickstrayer.me/cv for more complete list of positions and publications.
+SQL · Python · Excel · Smartsheet
 
-
-Disclaimer {#disclaimer}
+Languages
 --------------------------------------------------------------------------------
 
-Made w/ [**pagedown**](https://github.com/rstudio/pagedown). 
+Persian-Farsi: formal training in reading, listening, and interpretation.
 
-Source code: [github.com/nstrayer/cv](https://github.com/nstrayer/cv).
+About this CV {#disclaimer}
+--------------------------------------------------------------------------------
 
-Last updated on `r Sys.Date()`.
+Built with R Markdown and pagedown, adapted from the [DS4PS CV template](https://github.com/DS4PS/cv).
 
+[View source](https://github.com/nicholasspino/cv)
 
-
+Updated October 2026.
 
 Main
 ================================================================================
 
-Nick Strayer {#title}
+Nicholas Paul Spino {#title}
 --------------------------------------------------------------------------------
 
-```{r}
-intro_text <- "I have made [visualizations viewed by hundreds of thousands of people](https://www.nytimes.com/interactive/2016/08/26/us/college-student-migration.html), [sped up query times for 25 terabytes of data by an average of 4,800 times](https://livefreeordichotomize.com/2019/06/04/using_awk_and_r_to_parse_25tb/), and built [packages for R](https://github.com/nstrayer/shinysense) that let you [do magic](http://nickstrayer.me/dataDayTexas/).
+### Contract Specialist | Analysis and Reporting
 
-Currently searching for a data science position that allows me to build tools using visualization and machine learning to help people explore and understand their data. 
-"
+Contract specialist at NAVSUP WSS with five years of Marine Corps experience in intelligence analysis, reporting, and team leadership. Background in economics and Persian-Farsi; pursuing graduate study in program evaluation and data analytics.
 
-
-cat(sanitize_links(intro_text))
-```
-
-
-
-Education {data-icon=graduation-cap data-concise=true}
+Professional Experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
 
-```{r}
-position_data %>% print_section('education')
+```{r experience}
+print_section(position_data, 'experience')
 ```
 
-
-
-Selected Positions {data-icon=suitcase}
+Education {#education data-icon=graduation-cap}
 --------------------------------------------------------------------------------
 
-```{r}
-position_data %>% print_section('positions')
+```{r education}
+print_section(position_data, 'education')
 ```
 
-Selected Writing {data-icon=newspaper}
+Professional Development {data-icon=book}
 --------------------------------------------------------------------------------
 
-
-```{r}
-position_data %>% print_section('writings')
+```{r development}
+print_section(position_data, 'development')
 ```
 
+Applied Capabilities {data-icon=chart-line}
+--------------------------------------------------------------------------------
 
+```{r capabilities}
+print_section(position_data, 'capabilities')
+```

@@ -1,0 +1,30 @@
+/* Adapted from the DS4PS / Nick Strayer pagedown CV template. */
+body { font-family: Calibri, Arial, sans-serif; font-size: 10.5pt; line-height: 1.35; color: #303741; }
+h1, h2, h3 { font-family: Calibri, Arial, sans-serif; color: #152d46; }
+:root {
+  --sidebar-width: 12rem;
+  --sidebar-background-color: #f1f5f8;
+  --sidebar-horizontal-padding: 0.14in;
+  --decorator-outer-dim: 8px;
+  --decorator-border: 2px solid #99afc0;
+}
+.aside { font-size: 9.5pt; line-height: 1.4; }
+.aside .level2 { margin-top: 0.25in; }
+#main { font-size: 9pt; line-height: 1.28; }
+.aside li::before { display: none; }
+.aside ul { padding-left: 0; }
+.aside li { margin-bottom: 0.07in; }
+#title h1 { font-size: 26pt; margin-bottom: 0.06in; }
+#title h3 { font-size: 12pt; font-weight: normal; margin: 0 0 0.12in; }
+#title p { font-size: 9.5pt; line-height: 1.3; }
+.main-block { margin-top: 0.15in; }
+.main-block h2 { font-size: 14pt; }
+.blocks { break-inside: avoid; margin-top: 0.08in; }
+.blocks h3 { font-size: 11.5pt; }
+.details .place { margin-top: 0.02in; }
+.details .location:has(.blank-field) { display: none; }
+.details li { margin-bottom: 0.015in; }
+.decorator::after { background: #254a68; }
+#education { break-before: page; }
+#disclaimer { font-size: 8pt; position: static; margin-top: 0.25in; text-align: left; }
+a { color: #245576; }

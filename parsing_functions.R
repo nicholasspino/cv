@@ -49,7 +49,7 @@ strip_links_from_cols <- function(data, cols_to_strip){
 print_section <- function(position_data, section_id){
   position_data %>% 
     filter(section == section_id) %>% 
-    arrange(desc(end)) %>% 
+    arrange(sort_order) %>% 
     mutate(id = 1:n()) %>% 
     pivot_longer(
       starts_with('description'),
@@ -77,13 +77,13 @@ print_section <- function(position_data, section_id){
       )
     ) %>% 
     strip_links_from_cols(c('title', 'description_bullets')) %>% 
-    mutate_all(~ifelse(is.na(.), 'N/A', .)) %>% 
+    mutate_all(~ifelse(is.na(.) | . == '', '<span class="blank-field">&nbsp;</span>', .)) %>% 
     glue_data(
       "### {title}",
       "\n\n",
-      "{loc}",
-      "\n\n",
       "{institution}",
+      "\n\n",
+      "{loc}",
       "\n\n",
       "{timeline}", 
       "\n\n",
